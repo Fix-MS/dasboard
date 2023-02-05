@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "skipLibCheck": true,
+      "importHelpers": true,
+      "target": "esnext",
+      "module": "commonjs",
+      "typeRoots": ["./node_modules/@types", "./src/app/dasboard/src/types"],
+      "lib": ["es5", "es6", "dom"],
+      "baseUrl": "src", // TODO. ggf. check
+      "rootDir": "src",
+    },
+    "include": [
+      "src/app/dasboard/src/types/*.d.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules", "dist"
+    ],
+  }
