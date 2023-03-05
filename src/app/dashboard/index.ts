@@ -1,4 +1,5 @@
 // import {CONFIG} from './config';
+import {streetKEYS} from 'index';
 import {overwriteElementPrototypes} from './src/dom/dom';
 overwriteElementPrototypes();
 const db = {
@@ -9,8 +10,10 @@ const db = {
   },
   'streets': {
     'wilhelmstrasse': {},
+    'teststrasse': {},
   },
 };
+
 const keywords = Object.keys(db.keywords);
 const SEARCH_INDEX = {};
 const loadStreetSearchIndex = (streets: Array<string>) => {
@@ -33,12 +36,14 @@ const loadStreets = (url: string) => {
         SEARCH_INDEX['streets'] = loadStreetSearchIndex(data.streets);
       });
 };
-const highlight = (rawValue, value, highlighted, type) => {
+export const highlight = (rawValue, newStr, type) => {
+  const value: Lowercase<string> = rawValue.trim().toLowerCase();
   const matches = type.keys;
   const css = type.css;
-  let newStr = highlighted;
+  // let newStr = highlighted;
   matches.forEach((keyword) => {
     const i = value.toLowerCase().indexOf(keyword);
+
     const raw = rawValue.substring(i, i + keyword.length);
     newStr = newStr.replace(raw, `<span class='${css}'>${raw}</span>`);
   });
@@ -46,10 +51,16 @@ const highlight = (rawValue, value, highlighted, type) => {
 };
 const getMatchingStreets = (value, wordZ, SEARCH_INDEX) => {
   let matchesStreets = [];
-  const keys = SEARCH_INDEX['streets'].optimized;
+  const keys: streetKEYS = SEARCH_INDEX['streets'].optimized;
+  const keysß = SEARCH_INDEX['streets'].optimized
+      .map((word) => word.replaceAll('strasse', 'straße'));
+  console.log('keys');
+  console.log(keys);
   // TODO: mulitpl words and other triggers
-  if ((value.indexOf('strasse') !== -1) || (value.indexOf('straße') !== -1)) {
+  if (value.indexOf('strasse') !== -1) {
     matchesStreets = wordZ.filter((word) => keys.indexOf(word) !== -1 );
+  } else if (value.indexOf('straße') !== -1) {
+    matchesStreets = wordZ.filter((word) => keysß.indexOf(word) !== -1 );
   }
   return matchesStreets;
 };
@@ -66,24 +77,27 @@ document.addEventListener('DOMContentLoaded', function() {
   textarea.addEventListener('input', (event) => {
     const rawValue = (event.target as HTMLTextAreaElement).value;
     checklist.classList.toggle('show-checklist', rawValue.length > 0);
-    const newValue = rawValue;
     let value = (event.target as HTMLTextAreaElement).value;
     let highlighted = rawValue;
     const words = value.split(' ');
     value = value.trim().toLowerCase();
+
+    // splitted words
     const wordZ = words.map((word) => word.trim().toLowerCase());
+    console.log('wordZ');
+    console.log(wordZ);
     const matchesKeywords = getMatchingKeywords(wordZ, keywords);
     const matchesStreets = getMatchingStreets(value, wordZ, SEARCH_INDEX);
     const type = {
       keys: matchesKeywords,
       css: 'highlight--issue',
     };
-    highlighted = highlight(rawValue, value, highlighted, type);
+    highlighted = highlight(rawValue, highlighted, type);
     const type2 = {
       keys: matchesStreets,
       css: 'highlight--street',
     };
-    highlighted = highlight(rawValue, value, highlighted, type2);
+    highlighted = highlight(rawValue, highlighted, type2);
     const issueBadges = document.querySelectorAll(`[issue-id]`);
     const issueType = checklist.querySelector('[issue-check="type"]');
     issueType.classList.toggle('svg-success', matchesKeywords.length > 0);
@@ -108,6 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const issueLocation = checklist.querySelector('[issue-check="location"]');
     issueLocation.classList.toggle('svg-success', matchesStreets.length > 0);
     div.innerHTML = highlighted;
-    (event.target as HTMLTextAreaElement).value = newValue;
+    (event.target as HTMLTextAreaElement).value = rawValue;
   });
 });

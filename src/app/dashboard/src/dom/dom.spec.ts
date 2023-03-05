@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import {overwriteElementPrototypes} from './dom';
 
 // TODO: battle test

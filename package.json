@@ -17,8 +17,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsc",
-    "test": "jest",
-    "test:watch": "jest --watchAll  --coverage"
+    "test": "jest --env=jsdom",
+    "test:watch": "jest --env=jsdom --watchAll  --coverage"
   },
   "keywords": [],
   "author": "",
