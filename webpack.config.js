@@ -91,13 +91,13 @@ module.exports = {
     ],
   },
   devServer: {
-    watchOptions: {
-      ignored: ['**/node_modules', '**/dist'],
+    devMiddleware: {
+      writeToDisk: true,
     },
-    // logLevel: 'trace',
-    contentBase: ['src/app/dashboard/static/', 'src/app/dashboard/assets/'],
-    watchContentBase: true,
-    writeToDisk: true,
+    static: [
+      {directory: path.join(__dirname, 'src/app/dashboard/static/')},
+      {directory: path.join(__dirname, 'src/app/dashboard/assets/')},
+    ],
     compress: true,
     port: 4200,
   },
