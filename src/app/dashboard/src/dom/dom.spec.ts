@@ -3,8 +3,8 @@
  */
 import {overwriteElementPrototypes} from './dom';
 
-// TODO: battle test
-xdescribe('test prototypes', () => {
+// TODO: battle test also against mulitple nodes
+describe('test prototypes', () => {
   it('should test addClass', () => {
     document.documentElement.innerHTML = '<div id="test"></div>';
     const element = document.querySelector('#test');

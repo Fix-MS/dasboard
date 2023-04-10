@@ -5,6 +5,7 @@ module.exports = {
   },
   'ignorePatterns': ['node_modules/', 'dist/'],
   'extends': [
+    // 'airbnb',
     'google',
   ],
   'parser': '@typescript-eslint/parser',

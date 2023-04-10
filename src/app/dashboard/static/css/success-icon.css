@@ -1,0 +1,77 @@
+
+  svg-icon[name="success-icon"]{
+      fill: #efefef;
+     stroke: darkgray;
+  }
+  svg-icon[name="success-icon"] .success-tick{
+    opacity: 0;
+  }
+  @keyframes success-tick {
+    0% {
+      stroke-dashoffset: 16px;
+      opacity: 1
+    }
+    100% {
+      stroke-dashoffset: 31px;
+      opacity: 1
+    }
+  }
+  @keyframes success-circle-outline {
+    0% {
+      stroke-dashoffset: 72px;
+      opacity: 1
+    }
+    100% {
+      stroke-dashoffset: 0px;
+      opacity: 1
+    }
+  }
+  @keyframes success-circle-fill {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  
+  svg-icon[name="success-icon"].success .success-tick {
+    fill: none;
+    stroke-width: 1px;
+    stroke: #ffffff;
+    stroke-dasharray: 15px, 15px;
+    stroke-dashoffset: -14px;
+    animation: success-tick 50ms ease 400ms forwards;
+  }
+  svg-icon[name="success-icon"].success .success-circle-outline {
+    fill: none;
+    stroke-width: 1px;
+    stroke: #81c038;
+    stroke-dasharray: 72px, 72px;
+    stroke-dashoffset: 72px;
+    animation: success-circle-outline 50ms ease-in-out 400ms forwards;
+  }
+  svg-icon[name="success-icon"].success .success-circle-fill {
+    fill: #81c038;
+    stroke: none;
+    /* animation: success-circle-fill 300ms ease-out 1100ms forwards; */
+  }
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+    svg-icon[name="success-icon"] .success-tick {
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+      animation: none;
+      opacity: 1;
+    }
+    svg-icon[name="success-icon"] .success-circle-outline {
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+      animation: none;
+      opacity: 1;
+    }
+    svg-icon[name="success-icon"] .success-circle-fill {
+      animation: none;
+      opacity: 1;
+    }
+  }

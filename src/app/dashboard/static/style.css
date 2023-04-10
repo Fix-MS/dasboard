@@ -1,10 +1,21 @@
 @import 'css/checkbox.css';
+@import 'css/success-icon.css';
 body {
     font-family: 'Share Tech Mono', monospace, Verdana, sans-serif;
     font-size: 14px;
 }
 .badge.hidden {
    opacity: 0;
+}
+#badges{
+    margin-left: 10px;
+}
+badge-element{
+    opacity: 0;
+}
+badge-element.visible{
+    opacity: 1;
+    fill: white;
 }
 #divId{
     position: absolute;

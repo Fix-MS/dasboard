@@ -19,7 +19,7 @@
     "build": "tsc",
     "test": "jest --env=jsdom",
     "test:log": "jest --env=jsdom --verbose false",
-    "test:watch": "jest --env=jsdom --watchAll  --coverage",
+    "test:watch": "jest --env=jsdom --watchAll  --coverage --runInBand --unhandled-rejections=strict ",
     "clear:jest": "jest --clearCache"
   },
   "keywords": [],

@@ -1,18 +1,16 @@
 const path = require('path');
-const { execSync } = require("child_process");
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
 class WatchRunPlugin {
   apply(compiler) {
-      compiler.hooks.watchRun.tap('WatchRun', (comp) => {
-          if (comp.modifiedFiles) {
-              const changedFiles = Array.from(comp.modifiedFiles, (file) => `\n  ${file}`).join('');
-              console.log('===============================');
-              console.log('FILES CHANGED:', changedFiles);
-              console.log('===============================');
-
-          }
-      });
+    compiler.hooks.watchRun.tap('WatchRun', (comp) => {
+      if (comp.modifiedFiles) {
+        const changedFiles = Array.from(comp.modifiedFiles, (file) => `\n  ${file}`).join('');
+        console.log('===============================');
+        console.log('FILES CHANGED:', changedFiles);
+        console.log('===============================');
+      }
+    });
   }
 }
 const plugins = [];
@@ -35,15 +33,16 @@ plugins.push(new WebpackShellPluginNext({
   },
 }));
 plugins.push(
-  new ExtraWatchWebpackPlugin({
-      files: [  
+    new ExtraWatchWebpackPlugin({
+      files: [
         'src/app/dashboard/style.css',
+        'src/app/dashboard/style.scss',
         'src/app/dashboard/index.html',
         // 'src/**/*.css',
         // 'src/**/*.json',
         // 'src/**/*.svg',
         // 'src/**/*.html',
-       ],
+      ],
       // dirs: [ 'path/to/dir' ],
     }));
 
@@ -73,6 +72,10 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(scss|css)$/,
+      //   use: ['style-loader', 'css-loader', 'sass-loader'],
+      // },
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',

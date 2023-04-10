@@ -27,3 +27,12 @@ export type TYPE_HIGHLIGHT = {
     matches: Array<_MATCH>;
     css: string;
 }
+export type RESULT = {
+    type: string;
+    list: Array<any>
+}
+export type HTMLElements = NodeListOf<Element>;
+export type TYPE = 'location' | 'type';
+export interface MATCHED {
+    [key: TYPE]: Array<any>
+}

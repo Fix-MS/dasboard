@@ -11,47 +11,25 @@
     <script src="./index.js"></script>
   </head>
   <body class="dashboard">
-<!-- <span class="badge bg-secondary">Secondary</span>
-<span class="badge bg-success">Success</span>
-<span class="badge bg-danger">Danger</span>
-<span class="badge bg-warning text-dark">Warning</span>
-<span class="badge bg-info text-dark">Info</span>
-<span class="badge bg-light text-dark">Light</span>
-<span class="badge bg-dark">Dark</span> -->
     <form>
       <div class="mb-3 input-area" >
         <!-- <label for="exampleFormControlTextarea1" class="form-label">Bitte geben Sie ihr Problem ein.</label> -->
         <textarea placeholder="Bitte geben Sie ihr Problem ein ..." id="free-textarea" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <div class="form-control" id="divId"></div>
       </div>
-      <span issue-id="schlagloch" class="badge bg-primary hidden">Schlagloch (17)</span>
-      <span issue-type="street" class="badge bg-success hidden">
-        <span class="">
-          <svg class="icon-text" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-          </svg>  <span issue-value></span></span></span>
-      <span issue-id="glasbruch" class="badge bg-secondary hidden">Glasbruch (81)</span>
+      <div id="badges">
+      </div>
 
     </form>
     <section class="checklist">
       <ul>
-        <li>
-          <svg issue-check="type" xmlns="http://www.w3.org/2000/svg" class="svg-Xsuccess" viewBox="0 0 24 24">
-            <g stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
-              <circle class="success-circle-outline" cx="12" cy="12" r="11.5"/>
-              <circle class="success-circle-fill" cx="12" cy="12" r="11.5"/>
-              <polyline class="success-tick" points="17,8.5 9.5,15.5 7,13"/>
-            </g>
-          </svg> <span>Vorfall-Typ</span>
+        <li issue-check="type">
+          <svg-icon name="success-icon" size="24"></svg-icon>
+          <span>Vorfall-Typ</span>
         </li>
-        <li>
-          <svg issue-check="location" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24">
-            <g stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
-              <circle class="success-circle-outline" cx="12" cy="12" r="11.5"/>
-              <circle class="success-circle-fill" cx="12" cy="12" r="11.5"/>
-              <polyline class="success-tick" points="17,8.5 9.5,15.5 7,13"/>
-            </g>
-          </svg> <span>Ort</span>
+        <li issue-check="location">
+          <svg-icon name="success-icon" size="24"></svg-icon>
+          <span>Ort</span>
         </li>
       </ul>
     </section>

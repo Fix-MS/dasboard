@@ -10,7 +10,7 @@
       "rootDir": "src",
     },
     "include": [
-      "src/app/dasboard/src/types/*.d.ts",
+      "src/app/dasboard/*.d.ts",
       "src/**/*.ts"
     ],
     "exclude": [

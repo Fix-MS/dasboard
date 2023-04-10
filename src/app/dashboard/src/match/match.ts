@@ -1,10 +1,11 @@
-import {MATCHES} from 'index.d';
+
+import {MATCHES} from './../types';
 
 const MAP = {
-  'ä': 'ae',
-  'ö': 'oe',
-  'ü': 'ue',
-  'ß': 'ss',
+  ä: 'ae',
+  ö: 'oe',
+  ü: 'ue',
+  ß: 'ss',
 };
 
 
@@ -16,7 +17,7 @@ const _flip = (map) => {
   });
   return newMap;
 };
-const _replace = (phrase: string, direction = true) => {
+const update = (phrase: string, direction: boolean) => {
   let newPhrase = phrase;
   const map = direction ? MAP : _flip(MAP);
   const keys = Object.keys(map);
@@ -32,10 +33,10 @@ const _replace = (phrase: string, direction = true) => {
  * @return {string} encoded phrase
  */
 export const encode = (phrase: string): string => {
-  return _replace(phrase, true);
+  return update(phrase, true);
 };
 export const decode = (phrase: string): string => {
-  return _replace(phrase, false);
+  return update(phrase, false);
 };
 
 export const textMatch = (keys: Array<string>, input: string): MATCHES =>{
@@ -45,7 +46,10 @@ export const textMatch = (keys: Array<string>, input: string): MATCHES =>{
   const cleanKeys = keys
       .map((key) => key.toLowerCase()).map((key) => encode(key));
   cleanKeys.forEach((key, index) => {
+    
     if (cleanInput.indexOf(key) !== -1) {
+      console.log(key);
+      console.log(cleanKeys);
       let start = cleanInput.indexOf(key);
       const len = key.length;
       let matched = input.substring(start, start + len);

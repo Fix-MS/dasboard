@@ -1,4 +1,4 @@
-import {MATCHES} from 'index';
+import {MATCHES} from './../types';
 import {textMatch, encode, decode} from './match';
 
 xdescribe('test helper methods', () => {
