@@ -21,7 +21,9 @@
     "test:clear": "jest --clearCache",
     "test:log": "jest --env=jsdom --verbose false",
     "test:watch": "jest --env=jsdom --watchAll  --coverage --runInBand --unhandled-rejections=strict ",
-    "clear:jest": "jest --clearCache"
+    "clear:jest": "jest --clearCache",
+    "make-badges": "coverage-badges",
+    "postbuild": "npm run test && npm run make-badges"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "@vercel/ncc": "^0.34.0",
+    "coverage-badges-cli": "^1.1.1",
     "eslint": "^8.20.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.2.0",

@@ -13,5 +13,5 @@ module.exports = {
     '!**/coverage/**',
     '!**/vendor/**',
   ],
-  coverageReporters: ['json', 'lcov', 'text'],
+  coverageReporters: ['json', 'json-summary', 'lcov', 'text'],
 };

@@ -1,4 +1,5 @@
 # dasboard
+![Coverage](./coverage/badges.svg)
 desktop client for user to handle issues
 
 
