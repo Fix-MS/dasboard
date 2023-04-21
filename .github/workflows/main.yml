@@ -19,14 +19,15 @@ jobs:
     - run: ls -al
     - run: ls -al coverage
     # - run: mkdir docs
-    # - run: cp -r coverage/ docs/
+    - run: cp -r coverage/ docs/
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./coverage
+        publish_dir: ./docs
+        # publish_dir: ./coverage
     - run: ls -al
     - run: ls -al coverage
     # - run: ls -al ./docs

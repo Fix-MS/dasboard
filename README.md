@@ -6,5 +6,8 @@ icon 2
 ![Coverage](./badges.svg)
 desktop client for user to handle issues
 
+icon 3
+![Coverage](./docs/badges.svg)
+
 ## Daten
 | Strassen | DL-DE->BY-2.0 | https://opendata.stadt-muenster.de/dataset/stra%C3%9Fenliste-stra%C3%9Fenverzeichnis |
