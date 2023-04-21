@@ -28,4 +28,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./coverage
     - run: ls -al
+    - run: ls -al coverage
     # - run: ls -al ./docs
