@@ -15,7 +15,7 @@ jobs:
 
     - run: npm install
     - run: npm run test
-    - run: coverage-badges --output coverage/badges.svg
+    - run: npm run make-badges
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
