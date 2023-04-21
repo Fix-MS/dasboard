@@ -17,6 +17,7 @@ jobs:
     - run: npm run test
     - run: npm run make-badges
     - run: ls -al
+    - run: ls -al coverage
     # - run: mkdir docs
     # - run: cp -r coverage/ docs/
 

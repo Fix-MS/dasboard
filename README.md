@@ -1,5 +1,9 @@
 # dasboard
+
+icon 1
 ![Coverage](./coverage/badges.svg)
+icon 2
+![Coverage](./badges.svg)
 desktop client for user to handle issues
 
 ## Daten
