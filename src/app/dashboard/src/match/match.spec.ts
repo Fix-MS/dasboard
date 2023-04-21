@@ -17,8 +17,13 @@ xdescribe('test helper methods', () => {
   });
 });
 describe('test textMatch()', () => {
+  const DATA = {
+    location: ['Beispielstrasse', 'An der Beispielallee'],
+  };
+  const DATAß = {
+    location: ['Beispielstraße', 'An der Beispielallee'],
+  };
   it('should match simple word', () => {
-    const streets = ['Beispielstrasse', 'An der Beispielallee'];
     const input = 'Das ist die Beispielstrasse';
     const result: MATCHES = [{
       key: 'Beispielstrasse',
@@ -30,10 +35,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstrasse',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATA, 'location', input)).toEqual(result);
   });
   it('should match simple word', () => {
-    const streets = ['Beispielstrasse', 'An der Beispielallee'];
     const input = 'Das ist an der Beispielallee';
     const result: MATCHES = [{
       key: 'An der Beispielallee',
@@ -45,10 +49,9 @@ describe('test textMatch()', () => {
       cleaned: 'an der beispielallee',
       matched: 'an der Beispielallee',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATA, 'location', input)).toEqual(result);
   });
   it('should match simple word with unexpected case', () => {
-    const streets = ['Beispielstrasse', 'An der Beispielallee'];
     const input = 'Das ist die BeisPIELstrasse';
     const result: MATCHES = [{
       key: 'Beispielstrasse',
@@ -60,10 +63,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'BeisPIELstrasse',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATA, 'location', input)).toEqual(result);
   });
   it('should match simple word with ß instead of ss', () => {
-    const streets = ['Beispielstrasse', 'An der Beispielallee'];
     const input = 'Das ist die Beispielstraße';
     const result: MATCHES = [{
       key: 'Beispielstrasse',
@@ -75,10 +77,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstraße',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATA, 'location', input)).toEqual(result);
   });
   it('should match simple word with ß instead of ss', () => {
-    const streets = ['Beispielstraße', 'An der Beispielallee'];
     const input = 'Das ist die Beispielstrasse';
     const result: MATCHES = [{
       key: 'Beispielstraße',
@@ -90,10 +91,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstrasse',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATAß, 'location', input)).toEqual(result);
   });
   it('should match simple word with ß instead of ss', () => {
-    const streets = ['Beispielstraße', 'An der Beispielallee'];
     const input = 'Das ist die Beispielstraße';
     const result: MATCHES = [{
       key: 'Beispielstraße',
@@ -105,10 +105,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstraße',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATAß, 'location', input)).toEqual(result);
   });
   it('should match simple word with ß instead of ss (2x specialsChar)', () => {
-    const streets = ['Beispielstrasse', 'An der Beispielallee'];
     const input = 'Däs ist die Beispielstraße'; // 2 special chars
     const result: MATCHES = [{
       key: 'Beispielstrasse',
@@ -120,10 +119,9 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstraße',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATA, 'location', input)).toEqual(result);
   });
   it('should match simple word with ß instead of ss (2x specialsChar)', () => {
-    const streets = ['Beispielstraße', 'An der Beispielallee'];
     const input = 'Däs ist die Beispielstraße'; // 2 special chars
     const result: MATCHES = [{
       key: 'Beispielstraße',
@@ -135,13 +133,12 @@ describe('test textMatch()', () => {
       cleaned: 'beispielstrasse',
       matched: 'Beispielstraße',
     }];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATAß, 'location', input)).toEqual(result);
   });
   it('should match nothing when nothing detected', () => {
-    const streets = ['Beispielstraße', 'An der Beispielallee'];
     const input = 'Däs ist die Handjerystrasse';
     const result: MATCHES = [];
-    expect(textMatch(streets, input)).toEqual(result);
+    expect(textMatch(DATAß, 'location', input)).toEqual(result);
   });
 
   // TODO: am schlossgarten vs. schlossgarten

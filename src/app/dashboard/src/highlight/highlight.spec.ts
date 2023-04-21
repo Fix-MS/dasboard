@@ -1,6 +1,10 @@
-import {highlight, updateChecklist} from './highlight';
-import {enableFetchMocks} from 'jest-fetch-mock';
+import {MATCHED} from './../types/index.d';
+import {
+  highlight, showBadges, updateChecklist, updateHighlight,
+} from './highlight';
 import {TYPE_HIGHLIGHT} from '../types';
+import {Badge} from '../badge/badge';
+import {enableFetchMocks} from 'jest-fetch-mock';
 enableFetchMocks();
 
 describe('test showCheck', () => {
@@ -23,6 +27,7 @@ describe('test showCheck', () => {
 
   afterEach(() => {
     jest.resetModules();
+    document.documentElement.innerHTML = '';
   });
 
   it('it should show svg-success if list is not empty', () => {
@@ -38,8 +43,93 @@ describe('test showCheck', () => {
     expect(issueType.classList.contains('success')).toBe(false);
   });
 });
+describe('test showBadges()', () => {
+  const MATCHED: MATCHED = { // TODO: create mock.ts generator for streets
+    location: [{
+      cleaned: 'beispielstrasse',
+      index: 40,
+      key: 'beispielstrasse',
+      lengthCleaned: 10,
+      lengthMatched: 10,
+      matched: 'beispielstrasse',
+      startCleaned: 16,
+      startMatched: 16,
+    }],
+    types: [],
+  };
+  beforeEach(() => {
+    const html = `
+    <div id="badges"></div>
+    `;
+    document.documentElement.innerHTML = html.toString();
+  });
 
-
+  afterEach(() => {
+    jest.resetModules();
+    document.documentElement.innerHTML = '';
+  });
+  customElements.define('badge-element', Badge);
+  it('should display a simple badge for services', () => {
+    const MATCHED_EMPTY: MATCHED = {types: [], location: []};
+    showBadges(MATCHED_EMPTY);
+    const badges = document.querySelectorAll('#badges badge-element');
+    expect(badges.length).toEqual(0);
+  });
+  it('should display a simple badge for services', () => {
+    showBadges(MATCHED);
+    const badges = document.querySelectorAll('#badges badge-element');
+    expect(badges.length).toEqual(1);
+    showBadges(MATCHED); // re-add: dom node exists
+    const badges2 = document.querySelectorAll('#badges badge-element');
+    expect(badges2.length).toEqual(1);
+  });
+  it('should display a simple badge for services', () => {
+    const MATCHED2: MATCHED = {
+      location: [{
+        cleaned: 'teststrasse',
+        index: 40,
+        key: 'teststrasse',
+        lengthCleaned: 10,
+        lengthMatched: 10,
+        startCleaned: 16,
+        startMatched: 16,
+      }],
+      types: [],
+    };
+    showBadges(MATCHED);
+    const badges = document.querySelectorAll('#badges badge-element');
+    expect(badges.length).toEqual(1);
+    showBadges(MATCHED2);
+    const badges2 = document.querySelectorAll('#badges badge-element');
+    expect(badges2.length).toEqual(2);
+  });
+});
+describe('test updateHighlight()', () => {
+  it('should test basic updateHighlight function', () => {
+    const DATA = {
+      location: ['Neustrasse'],
+    };
+    const type = 'location';
+    const rawValue = 'In die Neustrasse';
+    const highlighted = 'In die Neustrasse';
+    const result = updateHighlight(DATA, type, rawValue, highlighted);
+    expect(result).toEqual({
+      highlighted: `In die <span class='highlight--${type}'>Neustrasse</span>`,
+      matched: [
+        {
+          'cleaned': 'neustrasse',
+          'index': 0,
+          'key': 'Neustrasse',
+          'lengthCleaned': 10,
+          'lengthMatched': 10,
+          'matched': 'Neustrasse',
+          'startCleaned': 7,
+          'startMatched': 7,
+        },
+      ],
+    });
+  });
+});
 describe('test highlight()', () => {
   const type: TYPE_HIGHLIGHT = {
     matches: [{

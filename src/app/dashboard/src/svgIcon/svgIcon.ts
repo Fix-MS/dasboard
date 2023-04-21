@@ -5,13 +5,14 @@ import {ICONS} from './icons';
  * @element success-icon
  */
 export class SvgIcon extends HTMLElement {
+  static attr = ['size', 'name'];
   /**
    * Returns an array of attribute names to observe for changes.
    *
    * @return {Array<string>} An array of attribute names to observe.
    */
   static get observedAttributes() {
-    return ['size', 'name'];
+    return SvgIcon.attr;
   }
   /**
    * constructor
@@ -40,12 +41,12 @@ export class SvgIcon extends HTMLElement {
    * @param {string} newValue new value
    */
   attributeChangedCallback(
-      name: string, oldValue: string | null, newValue: string | null) {
-    if (name === 'size' && oldValue !== newValue) {
-      this.connectedCallback();
-    }
-    if (name === 'name' && oldValue !== newValue) {
-      this.connectedCallback();
+      name: string, oldValue: string | null, newValue: string | null,
+  ) {
+    if (oldValue !== newValue) {
+      if (SvgIcon.attr.includes(name)) {
+        this.connectedCallback();
+      }
     }
   }
 }

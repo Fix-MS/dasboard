@@ -4,13 +4,14 @@
  * @element success-icon
  */
 export class Badge extends HTMLElement {
+  static attr = ['type', 'label'];
   /**
    * Returns an array of attribute names to observe for changes.
    *
    * @return {Array<string>} An array of attribute names to observe.
    */
   static get observedAttributes() {
-    return ['type', 'label'];
+    return Badge.attr;
   }
   /**
    * constructor
@@ -39,12 +40,12 @@ export class Badge extends HTMLElement {
    * @param {string} newValue new value
    */
   attributeChangedCallback(
-      name: string, oldValue: string | null, newValue: string | null) {
-    if (name === 'type' && oldValue !== newValue) {
-      this.connectedCallback();
-    }
-    if (name === 'label' && oldValue !== newValue) {
-      this.connectedCallback();
+      name: string, oldValue: string | null, newValue: string | null,
+  ) {
+    if (oldValue !== newValue) {
+      if (Badge.attr.includes(name)) {
+        this.connectedCallback();
+      }
     }
   }
 }

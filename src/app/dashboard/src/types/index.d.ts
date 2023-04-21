@@ -16,8 +16,13 @@ export type STREETS = {
     raw: Array<string>;
     optimized: Array<`${string.toLowerCase}`>;
 }
-export type SEARCH_INDEX = {
-    streets: STREETS;
+export type SEARCH_DATA = {
+    raw: Array<string>;
+    optimized: Array<`${string.toLowerCase}`>;
+}
+export type SEARCH_INDEX = { // TODO: generalize
+    streets: SEARCH_DATA;
+    services: SEARCH_DATA;
 };
 export type HIGHLIGHT = {
     keys: Array<string>;
@@ -33,6 +38,10 @@ export type RESULT = {
 }
 export type HTMLElements = NodeListOf<Element>;
 export type TYPE = 'location' | 'type';
+export type TYPES = Array<TYPE>;
 export interface MATCHED {
     [key: TYPE]: Array<any>
 }
+export type DB = {
+    [key: TYPE]: SEARCH_DATA;
+};

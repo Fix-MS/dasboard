@@ -39,17 +39,15 @@ export const decode = (phrase: string): string => {
   return update(phrase, false);
 };
 
-export const textMatch = (keys: Array<string>, input: string): MATCHES =>{
+export const textMatch = (data, type, input: string): MATCHES =>{
+  const keys: Array<string> = data[type];
   const result: MATCHES = [];
   const inputSmall = input.toLowerCase();
   const cleanInput = encode(inputSmall);
   const cleanKeys = keys
       .map((key) => key.toLowerCase()).map((key) => encode(key));
   cleanKeys.forEach((key, index) => {
-    
     if (cleanInput.indexOf(key) !== -1) {
-      console.log(key);
-      console.log(cleanKeys);
       let start = cleanInput.indexOf(key);
       const len = key.length;
       let matched = input.substring(start, start + len);

@@ -3,9 +3,8 @@
  */
 import {overwriteElementPrototypes} from './dom';
 
-// TODO: battle test also against mulitple nodes
 describe('test prototypes', () => {
-  it('should test addClass', () => {
+  it('should test addClass on 1 element', () => {
     document.documentElement.innerHTML = '<div id="test"></div>';
     const element = document.querySelector('#test');
     expect(element.getAttribute('class')).toEqual(null);
@@ -24,5 +23,28 @@ describe('test prototypes', () => {
     element.changeClass('blubber', 'newClass');
     expect(element.getAttribute('class')).toEqual('newClass');
     expect(true).toEqual(true);
+  });
+  it('should test addClass to multiple elements', () => {
+    document.documentElement.innerHTML = `
+    <div class="test"></div><div class="test"></div>
+    `;
+    const elements = document.querySelectorAll('.test');
+    overwriteElementPrototypes();
+    elements.addClass('foobar');
+    elements.forEach((element) => {
+      expect(element.getAttribute('class')).toEqual('test foobar');
+    });
+    elements.removeClass('foobar');
+    elements.forEach((element) => {
+      expect(element.getAttribute('class')).toEqual('test');
+    });
+    elements.toggleClass('bar', true);
+    elements.forEach((element) => {
+      expect(element.getAttribute('class')).toEqual('test bar');
+    });
+    elements.changeClass('bar', 'lorem');
+    elements.forEach((element) => {
+      expect(element.getAttribute('class')).toEqual('test lorem');
+    });
   });
 });

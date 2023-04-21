@@ -15,3 +15,11 @@
 * update webpack and npm modules
 * fix handling with mock (use jest-mock-fetch) and put in dom content loaded
 * fix tests
+
+
+15.04.2023
+* fixed data tests with whatwg-fetch
+
+21.04.2023
+* using https://testing-library.com/docs/dom-testing-library/intro
+* dom content loaded event needs to be fired to test events after it

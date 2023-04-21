@@ -2,7 +2,7 @@ global.jQuery = require('jquery');
 global.$ = global.jQuery;
 
 require('jest-fetch-mock').enableMocks();
-// fetchMock.dontMock();
+fetchMock.dontMock();
 
 
 // import {JSDOM} from 'jsdom';
