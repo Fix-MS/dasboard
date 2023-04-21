@@ -1,34 +1,34 @@
-name: Build & Deploy
-on:
-  push:
-    branches:
-      - main
+# name: Build & Deploy
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: 16
+# jobs:
+#   build-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - uses: actions/setup-node@v2
+#       with:
+#         node-version: 16
 
-    - run: npm install
-    - run: npm run test
-    - run: npm run make-badges
-    - run: mkdir docs
-    - run: ls -al
-    - run: ls -al ./coverage
-    - run: cp -r ./coverage/ ./docs/
-    - run: ls -al ./docs
+#     - run: npm install
+#     - run: npm run test
+#     - run: npm run make-badges
+#     - run: mkdir docs
+#     - run: ls -al
+#     - run: ls -al ./coverage
+#     - run: cp -r ./coverage ./docs
+#     - run: ls -al ./docs
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
-        # publish_dir: ./coverage
-    - run: ls -al
-    - run: ls -al coverage
-    # - run: ls -al ./docs
+#     # - name: Deploy
+#     #   uses: peaceiris/actions-gh-pages@v3
+#     #   if: github.ref == 'refs/heads/main'
+#     #   with:
+#     #     github_token: ${{ secrets.GITHUB_TOKEN }}
+#     #     publish_dir: ./docs
+#     #     # publish_dir: ./coverage
+#     # - run: ls -al
+#     # - run: ls -al coverage
+#     # - run: ls -al ./docs

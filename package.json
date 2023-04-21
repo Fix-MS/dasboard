@@ -23,7 +23,7 @@
     "test:watch": "jest --env=jsdom --watchAll  --coverage --runInBand --unhandled-rejections=strict ",
     "clear:jest": "jest --clearCache",
     "make-badges": "coverage-badges --output coverage/badges.svg",
-    "postbuild": "npm run test && npm run make-badges"
+    "prepublish": "npm run test && npm run make-badges"
   },
   "keywords": [],
   "author": "",
