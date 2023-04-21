@@ -23,3 +23,4 @@
 21.04.2023
 * using https://testing-library.com/docs/dom-testing-library/intro
 * dom content loaded event needs to be fired to test events after it
+* https://github.com/orgs/community/discussions/31587
