@@ -16,10 +16,11 @@ jobs:
     - run: npm install
     - run: npm run test
     - run: npm run make-badges
+    - run: mkdir docs
     - run: ls -al
-    - run: ls -al coverage
-    # - run: mkdir docs
-    - run: cp -r coverage/ docs/
+    - run: ls -al ./coverage
+    - run: cp -r ./coverage/ ./docs/
+    - run: ls -al ./docs
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
