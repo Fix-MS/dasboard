@@ -1,5 +1,7 @@
+import {APIS} from './../config';
 export type streetKEYS = `${string.toLowerCase}`;
 export type LOWER_CASE = `${string.toLowerCase}`;
+export type TYPE = keyof typeof APIS; // 'location' | 'type'
 
 export type MATCHES = Array<_MATCH>;
 export type _MATCH = {
@@ -21,8 +23,7 @@ export type SEARCH_DATA = {
     optimized: Array<`${string.toLowerCase}`>;
 }
 export type SEARCH_INDEX = { // TODO: generalize
-    streets: SEARCH_DATA;
-    services: SEARCH_DATA;
+    [key: TYPE]: SEARCH_DATA;
 };
 export type HIGHLIGHT = {
     keys: Array<string>;
@@ -37,7 +38,7 @@ export type RESULT = {
     list: Array<any>
 }
 export type HTMLElements = NodeListOf<Element>;
-export type TYPE = 'location' | 'type';
+
 export type TYPES = Array<TYPE>;
 export interface MATCHED {
     [key: TYPE]: Array<any>

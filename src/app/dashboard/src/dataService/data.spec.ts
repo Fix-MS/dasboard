@@ -1,4 +1,4 @@
-import {loadStreets, loadServices, getStreets, getServices} from './data';
+import {getData, loadData} from './data';
 import 'whatwg-fetch';
 
 describe('search', () => {
@@ -21,8 +21,7 @@ describe('search', () => {
         headers: {'content-type': 'application/json; charset=UTF-8'},
       });
       jest.spyOn(global, 'fetch').mockResolvedValue(mockResponse);
-      const url = 'https://api.com/streets.json';
-      loadStreets(url);
+      loadData('location');
     });
 
     afterEach(() => {
@@ -31,7 +30,7 @@ describe('search', () => {
     });
 
     it('should load and index streets from the given URL', () => {
-      expect(getStreets()).toEqual(['main st', 'second ave']);
+      expect(getData('location')).toEqual(['main st', 'second ave']);
     });
   });
 
@@ -44,8 +43,7 @@ describe('search', () => {
         headers: {'content-type': 'application/json; charset=UTF-8'},
       });
       jest.spyOn(global, 'fetch').mockResolvedValue(mockResponse);
-      const url = 'https://example.com/services.json';
-      loadServices(url);
+      loadData('type');
     });
 
     afterEach(() => {
@@ -54,7 +52,7 @@ describe('search', () => {
     });
 
     it('should load and index services from the given URL', () => {
-      expect(getServices()).toEqual(['service a', 'service b']);
+      expect(getData('type')).toEqual(['service a', 'service b']);
     });
   });
 });

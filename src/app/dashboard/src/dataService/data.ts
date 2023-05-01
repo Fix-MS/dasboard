@@ -1,11 +1,12 @@
 import {fetchData} from './fetchData';
-import {SEARCH_INDEX} from './../types';
+import {SEARCH_INDEX, TYPE} from './../types';
+import {APIS} from '../config';
 
 const SEARCH_INDEX: SEARCH_INDEX = {
-  streets: {
+  location: {
     optimized: [], raw: [],
   },
-  services: {
+  type: {
     optimized: [], raw: [],
   },
 };
@@ -21,7 +22,21 @@ const SEARCH_INDEX: SEARCH_INDEX = {
 //   },
 // };
 
-const loadSearchIndex = (streets: Array<string>) => {
+const loadSearchIndex = (type: TYPE, raw: any) => {
+  const data: Array<string> = [];
+  let streets: any;
+  switch (type) {
+    case 'type':
+      raw.forEach((element) => {
+        data.push(element['service_name']);
+      });
+      streets = data;
+
+      break;
+    case 'location':
+      streets = raw.streets;
+      break;
+  }
   // IDEA: get first words for sensitiv index or first parts
   const optimized = [];
   streets.forEach((street) => {
@@ -33,24 +48,14 @@ const loadSearchIndex = (streets: Array<string>) => {
   };
 };
 
-export const loadStreets = (url: string) => {
+
+export const loadData = async (type: TYPE) => {
+  const url = APIS[type];
   fetchData(url, (data) => {
-    SEARCH_INDEX['streets'] = loadSearchIndex(data.streets);
+    SEARCH_INDEX[type] = loadSearchIndex(type, data);
   });
 };
-export const loadServices = (url: string) => {
-  fetchData(url, (data) => {
-    const services = [];
-    data.forEach((element) => {
-      services.push(element['service_name']);
-    });
-    // TODO: clean services
-    SEARCH_INDEX['services'] = loadSearchIndex(services);
-  });
-};
-export const getStreets = () => {
-  return SEARCH_INDEX['streets'].optimized; // TODO: caching
-};
-export const getServices = () => {
-  return SEARCH_INDEX['services'].optimized; // TODO: caching
+
+export const getData = (type: TYPE) => {
+  return SEARCH_INDEX[type].optimized; // TODO: caching
 };
